@@ -58,7 +58,14 @@
             box-shadow: 12px 12px 0px var(--k-ink);
         }
 
-        .shadow-solid:active {
+        .shadow-solid-huge:hover {
+            transform: translate(-12px, -12px);
+            box-shadow: 20px 20px 0px var(--k-ink);
+            z-index: 50;
+        }
+
+        .shadow-solid:active,
+        .shadow-solid-huge:active {
             transform: translate(4px, 4px);
             box-shadow: 0px 0px 0px var(--k-ink);
         }
@@ -357,7 +364,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
             <div
-                class="md:col-span-4 bg-[var(--k-cyan)] outline-thick shadow-solid shape-arch p-10 pt-20 flex flex-col justify-between text-center min-h-[450px] interactable hover-pop">
+                class="md:col-span-4 bg-[var(--k-cyan)] outline-thick shadow-solid shadow-solid-huge shape-arch p-10 pt-20 flex flex-col justify-between text-center min-h-[450px] interactable hover-pop relative">
                 <div
                     class="w-24 h-24 bg-white outline-thick rounded-full mx-auto flex items-center justify-center mb-8 rotate-12">
                     <i data-lucide="cloud-lightning" class="w-10 h-10"></i>
@@ -369,7 +376,7 @@
             </div>
 
             <div
-                class="md:col-span-4 bg-[var(--k-yellow)] outline-thick shadow-solid rounded-full p-10 flex flex-col justify-center items-center text-center aspect-square interactable hover-spin w-full max-w-[450px] mx-auto">
+                class="md:col-span-4 bg-[var(--k-yellow)] outline-thick shadow-solid shadow-solid-huge rounded-full p-10 flex flex-col justify-center items-center text-center aspect-square interactable hover-spin w-full max-w-[450px] mx-auto relative">
                 <h3 class="font-dela text-[5rem] leading-[0.8] mb-4 text-white"
                     style="-webkit-text-stroke: 3px var(--k-ink);">VID<br>EO</h3>
                 <p class="font-bold text-lg max-w-[200px]">In-app video player with Picture-in-Picture mode.</p>
@@ -377,12 +384,12 @@
 
             <div class="md:col-span-4 flex flex-col gap-6">
                 <div
-                    class="bg-[var(--k-purple)] text-white outline-thick shadow-solid shape-pill p-10 flex-1 flex flex-col justify-center interactable">
+                    class="bg-[var(--k-purple)] text-white outline-thick shadow-solid shadow-solid-huge shape-pill p-10 flex-1 flex flex-col justify-center interactable relative">
                     <h3 class="font-dela text-2xl mb-2">MATERIAL 3</h3>
                     <p class="font-bold text-sm">Shape morphing, spring physics, and dynamic colors from album art.</p>
                 </div>
                 <div
-                    class="bg-[var(--k-green)] outline-thick shadow-solid shape-pill p-10 flex-1 flex flex-col justify-center interactable">
+                    class="bg-[var(--k-green)] outline-thick shadow-solid shadow-solid-huge shape-pill p-10 flex-1 flex flex-col justify-center interactable relative">
                     <h3 class="font-dela text-2xl mb-2">OFFLINE DOWNLOADS</h3>
                     <p class="font-bold text-sm">Batch download entire playlists and tracks directly to your vault.</p>
                 </div>
@@ -646,10 +653,11 @@
             // Feature Cards "Pop In"
             gsap.utils.toArray('.hover-pop, .hover-spin, .shape-pill.flex-1').forEach((card, i) => {
                 gsap.from(card, {
-                    scrollTrigger: { trigger: card, start: "top 85%" },
-                    y: 100, scale: 0.5, opacity: 0,
+                    scrollTrigger: { trigger: card, start: "top 85%", end: "bottom 15%" },
+                    y: 100, scale: 0.2, opacity: 0,
                     rotation: i % 2 === 0 ? 5 : -5,
-                    duration: 0.8, ease: "back.out(1.5)"
+                    duration: 0.8, ease: "back.out(2)",
+                    clearProps: "all"
                 });
             });
 
